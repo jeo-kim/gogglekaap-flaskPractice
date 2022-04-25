@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, g
 from flask_wtf.csrf import CSRFProtect
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -35,6 +35,16 @@ def create_app():
 
     '''CSRF INIT'''
     csrf.init_app(app)
+
+    '''REQUEST HOOK'''
+    @app.before_request
+    def before_request():
+        g.db = db.session
+
+    @app.teardown_request
+    def teardown_request(exception):
+        if hasattr(g, 'db'):
+            g.db.close()
 
     @app.errorhandler(404)
     def page_404(error):
