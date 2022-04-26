@@ -1,17 +1,3 @@
-import sys # gogglekaap에 있는 것을 가져올 때에는 이렇게 경로 처리.
-sys.path.append('.')
-
-
-from gogglekaap.configs import TestingConfig
-from gogglekaap import create_app
-import pytest
-
-@pytest.fixture
-def client():
-    app = create_app(TestingConfig())
-
-    with app.test_client() as client:
-        yield client
 
 def test_auth(client):
     r = client.get(
