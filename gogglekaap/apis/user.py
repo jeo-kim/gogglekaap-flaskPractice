@@ -24,6 +24,7 @@ post_parser.add_argument('password', required=True, help="유저 패스워드")
 # '/api/users'
 @ns.route('')
 @ns.response(409, 'User Id already exists')
+@ns.deprecated
 class UserList(Resource):
     @ns.marshal_list_with(user, skip_none=True)  # skip_none true 이면 null인 필드는 키값도 노출시키지 않는 것.
     def get(self):
@@ -53,6 +54,7 @@ class UserList(Resource):
 # '/api/users/1'
 @ns.route('/<int:id>')
 @ns.param('id', '유저 고유 번호')
+@ns.deprecated
 class User(Resource):
     @ns.marshal_list_with(user, skip_none=True)
     def get(self, id):
