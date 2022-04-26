@@ -1,5 +1,6 @@
 from flask import Blueprint
 from flask_restx import Api
+from .user import ns as UserNamespace
 
 blueprint = Blueprint(
     'api',
@@ -15,4 +16,4 @@ api = Api(
     description='Welcome my API docs'
 )
 
-#Todo : add namespace to Blueprint
+api.add_namespace(UserNamespace)
