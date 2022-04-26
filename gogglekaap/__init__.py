@@ -20,6 +20,7 @@ def create_app(config=None):
             config = ProductionConfig()
 
     print("run with: ", config)
+    print("궁금.. 어떤 db?: ", config.SQLALCHEMY_DATABASE_URI)
 
     app.config['SECRET_KEY'] = 'asdfasdf'
     app.config['SESSION_COOKIE_NAME'] = 'gogglekaap'
